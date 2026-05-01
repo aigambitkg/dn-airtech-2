@@ -1,7 +1,7 @@
 /* ============================================================
    App.tsx – DN AirTecH GmbH
-   Design: "Thermal Precision" – Industrial Neo-Futurism 2040
-   Theme: Dark (deep space background)
+   Design: "Precision Light" – White + Red #D32F2F + Blue #1565C0
+   Theme: Light (clean white background)
    ============================================================ */
 
 import { Toaster } from "@/components/ui/sonner";
@@ -44,7 +44,7 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
           <div className="flex flex-col min-h-screen">

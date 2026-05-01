@@ -1,41 +1,19 @@
 /* ============================================================
-   Klimageräte Page – DN AirTecH GmbH
-   Design: "Thermal Precision" – Cyan/Blue Theme
+   Klimageräte – DN AirTecH GmbH
+   Design: "Precision Light" – White + Red (#D32F2F) + Blue (#1565C0)
    ============================================================ */
 
 import { useEffect } from 'react';
 import { Link } from 'wouter';
 import { Wind, CheckCircle, ArrowRight, Phone, Snowflake, Sun, Wifi } from 'lucide-react';
-import ParticleField from '@/components/ParticleField';
 
 const KLIMA_IMAGE = 'https://d2xsxph8kpxj0f.cloudfront.net/310419663028072501/aP9D2Nd9v4NH2iF8FuLCZP/klima_3d-DNjJjuXEVDuNtiQHUg2UVB.webp';
-const HERO_IMAGE = 'https://d2xsxph8kpxj0f.cloudfront.net/310419663028072501/aP9D2Nd9v4NH2iF8FuLCZP/hero_airtech_2040-bo8NoLUqCAAsmfisCCvahg.webp';
 
 const klimaTypes = [
-  {
-    title: 'Split-Klimaanlage',
-    desc: 'Die klassische Lösung für einzelne Räume. Besteht aus Innen- und Außeneinheit und bietet optimale Leistung bei geringem Energieverbrauch.',
-    features: ['Für einzelne Räume', 'Einfache Installation', 'Leiser Betrieb', 'Energieeffizienzklasse A+++'],
-    tag: 'Bestseller',
-  },
-  {
-    title: 'Multi-Split-System',
-    desc: 'Eine Außeneinheit versorgt mehrere Inneneinheiten – ideal für Mehrfamilienhäuser und Bürogebäude mit individueller Zonenregelung.',
-    features: ['Mehrere Räume', 'Individuelle Steuerung', 'Platzsparend', 'Zentrale Außeneinheit'],
-    tag: 'Flexibel',
-  },
-  {
-    title: 'Inverter-Klimaanlage',
-    desc: 'Modernste Technologie mit stufenloser Leistungsregulierung. Spart bis zu 40% Energie im Vergleich zu herkömmlichen Systemen.',
-    features: ['Stufenlose Regelung', 'Bis 40% Energieeinsparung', 'Schnelle Reaktion', 'Gleichmäßige Temperatur'],
-    tag: 'Energiesparend',
-  },
-  {
-    title: 'Deckenkassetten',
-    desc: 'Ideal für Gewerberäume und Büros. Die Einheit wird in der Decke versenkt und verteilt die Luft gleichmäßig in alle Richtungen.',
-    features: ['Für Gewerberäume', 'Unsichtbare Installation', '360° Luftverteilung', 'Hohe Leistung'],
-    tag: 'Gewerbe',
-  },
+  { title: 'Split-Klimaanlage', desc: 'Die klassische Lösung für einzelne Räume. Besteht aus Innen- und Außeneinheit und bietet optimale Leistung bei geringem Energieverbrauch.', features: ['Für einzelne Räume', 'Einfache Installation', 'Leiser Betrieb', 'Energieeffizienzklasse A+++'], tag: 'Bestseller', color: 'red' },
+  { title: 'Multi-Split-System', desc: 'Eine Außeneinheit versorgt mehrere Inneneinheiten – ideal für Mehrfamilienhäuser und Bürogebäude mit individueller Zonenregelung.', features: ['Mehrere Räume', 'Individuelle Steuerung', 'Platzsparend', 'Zentrale Außeneinheit'], tag: 'Flexibel', color: 'blue' },
+  { title: 'Inverter-Klimaanlage', desc: 'Modernste Technologie mit stufenloser Leistungsregulierung. Spart bis zu 40% Energie im Vergleich zu herkömmlichen Systemen.', features: ['Stufenlose Regelung', 'Bis 40% Energieeinsparung', 'Schnelle Reaktion', 'Gleichmäßige Temperatur'], tag: 'Energiesparend', color: 'red' },
+  { title: 'Deckenkassetten', desc: 'Ideal für Gewerberäume und Büros. Die Einheit wird in der Decke versenkt und verteilt die Luft gleichmäßig in alle Richtungen.', features: ['Für Gewerberäume', 'Unsichtbare Installation', '360° Luftverteilung', 'Hohe Leistung'], tag: 'Gewerbe', color: 'blue' },
 ];
 
 const features = [
@@ -50,76 +28,105 @@ export default function Klimageraete() {
     window.scrollTo(0, 0);
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
     document.querySelectorAll('.scroll-fade-in, .stagger-children').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* HERO */}
-      <section className="relative min-h-[65vh] flex items-center overflow-hidden pt-20">
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${HERO_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        <div className="hero-overlay absolute inset-0" />
-        <div className="absolute inset-0 grid-bg opacity-20" />
-        <div className="absolute inset-0"><ParticleField count={40} interactive={false} /></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-4"><div className="w-8 h-px bg-cyan-400" /><span className="section-label">Klimageräte · Offenbach am Main</span></div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.03em' }}>
-              <span className="text-white">Klimageräte</span><br />
-              <span className="gradient-heading">der nächsten Generation</span>
+    <div className="min-h-screen bg-white">
+
+      {/* ── HERO ──────────────────────────────────────────────── */}
+      <section className="relative min-h-[65vh] flex items-end pb-16 overflow-hidden pt-16">
+        <div className="absolute inset-0" style={{ backgroundImage: `url(${KLIMA_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(26,26,46,0.9) 100%)' }} />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-2xl">
+            <div className="hero-badge mb-4 inline-flex" style={{ background: 'rgba(211,47,47,0.15)', borderColor: 'rgba(211,47,47,0.4)', color: '#EF5350' }}>
+              <Snowflake className="w-3 h-3" /> Kühlen & Heizen · A+++ Effizienz
+            </div>
+            <h1 className="text-5xl sm:text-6xl font-extrabold text-white mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.03em' }}>
+              Klimageräte<br /><span style={{ color: '#EF5350' }}>für jede Anforderung</span>
             </h1>
-            <p className="text-slate-300 text-xl leading-relaxed mb-8 max-w-2xl">
-              Split-, Inverter- und Multi-Split-Klimaanlagen für optimalen Komfort – energieeffizient, leise und intelligent.
+            <p className="text-gray-200 text-lg leading-relaxed mb-8 max-w-xl">
+              Modernste Klimaanlagen für Wohn- und Gewerberäume. Energieeffizient, leise und intelligent steuerbar.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/kontakt"><button className="btn-primary-glow flex items-center gap-2">Angebot anfragen<ArrowRight className="w-4 h-4" /></button></Link>
-              <a href="tel:+4969330887540"><button className="flex items-center gap-2 px-6 py-3 border border-white/20 text-white hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 font-semibold text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif' }}><Phone className="w-4 h-4" />Jetzt anrufen</button></a>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/kontakt">
+                <button className="btn-primary flex items-center gap-2">KOSTENLOSE BERATUNG <ArrowRight className="w-4 h-4" /></button>
+              </Link>
+              <a href="tel:+4969330887540">
+                <button className="flex items-center gap-2 px-6 py-3 border-2 border-white/40 text-white hover:bg-white/10 transition-all font-semibold text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '0.05em' }}>
+                  <Phone className="w-4 h-4" /> JETZT ANRUFEN
+                </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="relative py-20 bg-[oklch(0.11_0.012_240)] overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-15" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
-            {features.map((f) => (
-              <div key={f.title} className="glass-card neon-border p-6 text-center">
-                <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 border border-cyan-400/30 bg-cyan-400/10"><f.icon className="w-6 h-6 text-cyan-400" /></div>
-                <h3 className="text-white font-bold mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{f.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
+      {/* ── STATS ─────────────────────────────────────────────── */}
+      <section className="py-12 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 stagger-children">
+            {[{ val: 'A+++', label: 'Energieeffizienz' }, { val: '300+', label: 'Anlagen installiert' }, { val: '40%', label: 'Energieeinsparung' }, { val: '24h', label: 'Service & Wartung' }].map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="stat-number text-4xl lg:text-5xl">{s.val}</div>
+                <div className="text-gray-600 text-sm mt-1" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TYPES */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 circuit-bg" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-16 scroll-fade-in">
-            <div className="flex items-center gap-3 mb-4"><div className="w-8 h-px bg-cyan-400" /><span className="section-label">Produktübersicht</span></div>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em' }}>
-              Das richtige System <span className="gradient-heading">für jeden Bedarf</span>
-            </h2>
+      {/* ── FEATURES ──────────────────────────────────────────── */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 scroll-fade-in">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="divider-red" /><span className="section-label">Funktionen</span><div className="divider-red" />
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em' }}>Mehr als nur Kühlen</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 stagger-children">
+            {features.map((f, i) => (
+              <div key={f.title} className="card-light p-6 text-center">
+                <div className={`icon-box-${i % 2 === 0 ? 'red' : 'blue'} mx-auto mb-4`}><f.icon className="w-5 h-5" /></div>
+                <h3 className="text-gray-900 font-bold mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{f.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SYSTEMS ───────────────────────────────────────────── */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mb-14 scroll-fade-in">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="divider-red" /><span className="section-label">Systeme</span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em' }}>
+              Das richtige System<br /><span className="gradient-heading-red">für jeden Bedarf</span>
+            </h2>
+            <p className="text-gray-500 leading-relaxed">Von der einfachen Split-Anlage bis zum komplexen Multi-Split-System – wir finden die optimale Lösung für Sie.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 stagger-children">
             {klimaTypes.map((type) => (
-              <div key={type.title} className="glass-card service-card neon-border p-6 h-full">
+              <div key={type.title} className="card-light p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="tag-cyan">{type.tag}</span>
-                  <div className="w-8 h-8 flex items-center justify-center border border-cyan-400/30 bg-cyan-400/10"><Wind className="w-4 h-4 text-cyan-400" /></div>
+                  <span className="px-2 py-1 text-xs font-bold" style={{ background: type.color === 'red' ? 'rgba(211,47,47,0.08)' : 'rgba(21,101,192,0.08)', color: type.color === 'red' ? '#D32F2F' : '#1565C0', fontFamily: 'Space Grotesk, sans-serif' }}>{type.tag}</span>
+                  <div className={`icon-box-${type.color}`}><Wind className="w-4 h-4" /></div>
                 </div>
-                <h3 className="text-white font-bold text-xl mb-3" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{type.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-5">{type.desc}</p>
-                <ul className="space-y-2">
+                <h3 className="text-gray-900 font-bold text-lg mb-2" style={{ fontFamily: 'Space Grotesk, sans-serif' }}>{type.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">{type.desc}</p>
+                <ul className="space-y-1.5">
                   {type.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-slate-300"><CheckCircle className="w-4 h-4 text-cyan-400 flex-shrink-0" />{f}</li>
+                    <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
+                      <CheckCircle className="w-3.5 h-3.5 flex-shrink-0" style={{ color: type.color === 'red' ? '#D32F2F' : '#1565C0' }} />{f}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -128,50 +135,22 @@ export default function Klimageraete() {
         </div>
       </section>
 
-      {/* PRODUCT IMAGE */}
-      <section className="relative py-24 bg-[oklch(0.11_0.012_240)] overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-15" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="scroll-fade-in">
-              <div className="flex items-center gap-3 mb-4"><div className="w-8 h-px bg-cyan-400" /><span className="section-label">Installation & Service</span></div>
-              <h2 className="text-4xl font-bold text-white mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em' }}>
-                Von der Beratung bis zur <span className="gradient-heading">Inbetriebnahme</span>
-              </h2>
-              <p className="text-slate-400 leading-relaxed mb-6">
-                Wir übernehmen die komplette Abwicklung – von der Planung über die Installation bis zur Einweisung und Wartung. 
-                Alle Arbeiten werden von zertifizierten Klimatechnikern durchgeführt.
-              </p>
-              <div className="space-y-3 mb-8">
-                {['Kostenlose Vor-Ort-Beratung', 'Professionelle Installation', 'Einweisung & Inbetriebnahme', 'Regelmäßige Wartungsverträge', 'Schneller Kundendienst'].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-slate-300 text-sm"><CheckCircle className="w-4 h-4 text-cyan-400 flex-shrink-0" />{item}</div>
-                ))}
-              </div>
-              <Link href="/kontakt"><button className="btn-primary-glow flex items-center gap-2">Beratung anfragen<ArrowRight className="w-4 h-4" /></button></Link>
-            </div>
-            <div className="relative scroll-fade-in">
-              <img src={KLIMA_IMAGE} alt="Klimaanlage" className="w-full rounded-sm object-cover h-80" />
-              <div className="absolute -bottom-4 -left-4 glass-card neon-border p-4">
-                <div className="stat-number text-3xl">A+++</div>
-                <div className="text-white text-sm font-medium">Energieeffizienz</div>
-                <div className="text-slate-400 text-xs">Höchste Klasse</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 circuit-bg" />
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em' }}>
-            Jetzt <span className="gradient-heading">Klimaanlage installieren</span>
-          </h2>
-          <p className="text-slate-300 text-xl mb-10 max-w-2xl mx-auto">Kontaktieren Sie uns für ein kostenloses Angebot und professionelle Beratung.</p>
+      {/* ── CTA ───────────────────────────────────────────────── */}
+      <section className="py-20 section-red">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '-0.02em' }}>Klimaanlage installieren lassen?</h2>
+          <p className="text-red-100 text-lg mb-8 max-w-2xl mx-auto">Kontaktieren Sie uns für eine kostenlose Beratung und ein individuelles Angebot.</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/kontakt"><button className="btn-primary-glow flex items-center gap-2 text-base px-8 py-4">Kostenlose Beratung<ArrowRight className="w-5 h-5" /></button></Link>
-            <a href="tel:+4969330887540"><button className="flex items-center gap-2 px-8 py-4 border border-white/20 text-white hover:border-cyan-400/50 hover:text-cyan-400 transition-all duration-300 font-semibold" style={{ fontFamily: 'Space Grotesk, sans-serif' }}><Phone className="w-5 h-5" />Jetzt anrufen</button></a>
+            <Link href="/kontakt">
+              <button className="flex items-center gap-2 px-8 py-4 bg-white text-red-600 font-bold hover:bg-gray-50 transition-all" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '0.05em', fontSize: '0.875rem' }}>
+                KOSTENLOSE BERATUNG <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
+            <a href="tel:+4969330887540">
+              <button className="flex items-center gap-2 px-8 py-4 border-2 border-white/40 text-white hover:bg-white/10 transition-all font-semibold text-sm" style={{ fontFamily: 'Space Grotesk, sans-serif', letterSpacing: '0.05em' }}>
+                <Phone className="w-4 h-4" /> +49 69 3308 8754
+              </button>
+            </a>
           </div>
         </div>
       </section>

@@ -23,23 +23,34 @@ interface ParticleFieldProps {
   count?: number;
   interactive?: boolean;
   className?: string;
+  dark?: boolean;
 }
 
-const COLORS = [
-  'rgba(34, 211, 238, ',   // Plasma Cyan
-  'rgba(14, 165, 233, ',   // Electric Blue
-  'rgba(99, 102, 241, ',   // Indigo
-  'rgba(251, 146, 60, ',   // Thermal Orange (sparse)
+// Light mode colors: subtle red/blue from logo
+const COLORS_LIGHT = [
+  'rgba(211, 47, 47, ',    // Brand Red
+  'rgba(239, 83, 80, ',    // Brand Red Light
+  'rgba(21, 101, 192, ',   // Brand Blue
+  'rgba(30, 136, 229, ',   // Brand Blue Light
+  'rgba(150, 150, 170, ',  // Neutral
+];
+// Dark mode colors for hero sections with image overlay
+const COLORS_DARK = [
+  'rgba(255, 255, 255, ',  // White
+  'rgba(211, 47, 47, ',    // Brand Red
+  'rgba(30, 136, 229, ',   // Brand Blue
+  'rgba(255, 200, 200, ',  // Light Red
 ];
 
-export default function ParticleField({ count = 80, interactive = true, className = '' }: ParticleFieldProps) {
+export default function ParticleField({ count = 80, interactive = true, className = '', dark = false }: ParticleFieldProps) {
+  const COLORS = dark ? COLORS_DARK : COLORS_LIGHT;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const animFrameRef = useRef<number>(0);
 
   const createParticle = useCallback((canvas: HTMLCanvasElement): Particle => {
-    const colorIndex = Math.random() < 0.1 ? 3 : Math.floor(Math.random() * 3);
+    const colorIndex = Math.floor(Math.random() * COLORS.length);
     return {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -154,7 +165,7 @@ export default function ParticleField({ count = 80, interactive = true, classNam
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(34, 211, 238, ${opacity})`;
+            ctx.strokeStyle = dark ? `rgba(255,255,255,${opacity})` : `rgba(211,47,47,${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
